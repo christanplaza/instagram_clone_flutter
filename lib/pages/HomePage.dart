@@ -43,7 +43,13 @@ class _HomePageState extends State<HomePage> {
     _googleSignIn.signInSilently();
   }
 
-  Future<void> _handleGetContact(GoogleSignInAccount signInAccount) async {}
+  Future<void> _handleGetContact(GoogleSignInAccount signInAccount) async {
+    await saveUserInfoToFireStore();
+  }
+
+  saveUserInfoToFireStore() async {
+    final GoogleSignInAccount? gCurrentUser = _googleSignIn.currentUser;
+  }
 
   Future<void> loginUser() async {
     await _googleSignIn.signIn();
@@ -93,11 +99,7 @@ class _HomePageState extends State<HomePage> {
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home)),
             BottomNavigationBarItem(icon: Icon(Icons.search)),
-            BottomNavigationBarItem(
-                icon: Icon(
-              Icons.photo_camera,
-              size: 37.0,
-            )),
+            BottomNavigationBarItem(icon: Icon(Icons.photo_camera)),
             BottomNavigationBarItem(icon: Icon(Icons.favorite)),
             BottomNavigationBarItem(icon: Icon(Icons.person)),
           ],
